@@ -2,34 +2,33 @@
 /**
  * main - Entry point
  *
- * Return: Always 0 (Success/completed)
+ * Return: Always 0 (Success)
  */
-int main(void)
 {
-	int c;
-	int d = 0;
+	int x, y;
 
-	while (d < 10)
+	for (x = 48; x <= 57; x++)
 	{
-		c = 0;
-		while (c < 10)
+		for (y = 48; y <= 57; y++)
 		{
-			if (d != c && d < c)
+			if (x == y || y <= x)
+			{
+			}
+			else
+			{
+				putchar(x);
+				putchar(y);
+				if (x == 56 && y == 57)
 				{
-					putchar('0' + d);
-					putchar('0' + c);
-
-					if (c + d != 17)
-					{
-						putchar(',');
-						putchar(' ');
-					}
 				}
-
-			c++;
+				else
+				{
+					putchar(44);
+					putchar(' ');
+				}
+			}
 		}
-		d++;
 	}
 	putchar('\n');
-	return (0);
+	return (0);
 }
