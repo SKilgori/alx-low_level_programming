@@ -1,51 +1,49 @@
 #include "main.h"
+
 /**
- * print_times_table - print n times the tables
- * @n: where start table
- *
- * Return: nothing
+ * print_times_table - function to print multiplication table
+ * @n: integer
  */
 void print_times_table(int n)
 {
-	int r, c;
-	int h, d, u, mul;
+	int i;
+	int j;
+	int k;
 
-	if (n >= 0 && n <= 15)
+	if (n > 0 && n < 15)
 	{
-		for (r = 0; r <= n; r++)
+		for (i = 0; i <= n; i++)
 		{
-			for (c = 0; c <= n; c++)
+			_putchar('0');
+			for (j = 1; j <= n; j++)
 			{
-				mul = r * c;
-				h = mul / 100;
-				d = mul / 10 % 10;
-				u = mul % 10;
-				if (h == 0 && c != 0)
-				{
-					_putchar(' ');
-					if (d == 0)
-						_putchar(' ');
-					else
-						_putchar(d + '0');
-					_putchar(u + '0');
-				}
-				else if (h != 0)
-				{
-					_putchar(h + '0');
-					_putchar(d + '0');
-					_putchar(u + '0');
-				}
-				if (c == 0)
-					_putchar('0');
-				if (c != n)
+				k = i * j;
+				if (k <= 9)
 				{
 					_putchar(',');
 					_putchar(' ');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar(k + '0');
+				}
+				else if (k > 9 && k <= 99)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar(k / 10 + '0');
+					_putchar(k % 10 + '0');
+				}
+				else
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(k / 100 + '0');
+					_putchar(k / 10 % 10 + '0');
+					_putchar(k % 10 + '0');
 				}
 			}
 			_putchar('\n');
-			c = 0;
 		}
 	}
 }
- 
