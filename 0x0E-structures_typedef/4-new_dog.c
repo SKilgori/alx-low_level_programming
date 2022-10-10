@@ -1,82 +1,76 @@
-#include <stdlib.h>
 #include "dog.h"
-
+#include <stdio.h>
+#include <stdlib.h>
 /**
- * _copy - Make a copy of passed in argument
- *  @src: Data to make copy of
- *  Return Pointer
+ * new_dog - create new data structure for dog
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: dog owner
+ *
+ * Return: Pointer to new dog
  */
-char *_copy(char *src)
+dog_t *new_dog(char *name, float age, char *owner)
 {
-	char *ptr;
-	int i, len;
+	dog_t *new_dog;
+	int len_name, len_owner;
 
-	if (src == NULL)
+	new_dog = malloc(sizeof(dog_t));
+	if (new_dog == NULL)
+		return (NULL);
+
+	len_name = _strlen(name);
+	new_dog->name = malloc(sizeof(char) * len_name + 1);
+	if (new_dog->name == NULL)
 	{
+		free(new_dog);
+		return (NULL);
+	}
+	new_dog->name = _strcpy(new_dog->name, name);
+	len_owner = _strlen(owner);
+	new_dog->owner = malloc(sizeof(char) * len_owner + 1);
+	if (new_dog->owner == NULL)
+	{
+		free(new_dog->name);
+		free(new_dog);
 		return (NULL);
 	}
 
-	for (len = 0; src[len] != '\0'; len++)
-		;
+	new_dog->owner = _strcpy(new_dog->owner, owner);
+	new_dog->age = age;
 
-	ptr = malloc(sizeof(char) * (len + 1));
-
-	if (ptr == NULL)
-	{
-		return (NULL);
-	}
-
-	for (i = 0; src[i] != '\0'; i++)
-	{
-		ptr[i] = src[i];
-	}
-
-	ptr[i] = '\0';
-	return (ptr);
+	return (new_dog);
 }
 
 /**
- * new_dog     - Create a new dog variable
- * @name:        Name of the dog
- * @age:         Age of the dog
- * @owner:       Owner of the dog
- * Return:       Pointer to new dog variable
+ * _strlen - determinates the lenght of a string
+ * @s: pointer to string
+ * Return: the length
  */
-
-dog_t *new_dog(char *name, float age, char *owner)
+int _strlen(char *s)
 {
-	dog_t *snoopie;
-	char *new_name, *new_owner;
+	int a;
 
-	if (name == NULL || owner == NULL)
+	for (a = 0; s[a] != '\0'; a++)
+		;
+	return (a);
+}
+
+/**
+ * _strcpy - copies a pointed string
+ * @dest: pointer to the destine string
+ * @src: pointer to the source string
+ * Return: the adress of the destiny string
+ */
+char *_strcpy(char *dest, char *src)
+{
+	int a = 0;
+
+	while (src[a] != '\0')
 	{
-		return (NULL);
+		dest[a] = src[a];
+		a++;
 	}
 
-	snoopie = malloc(sizeof(dog_t));
-	if (snoopie == NULL)
-	{
-		return (NULL);
-	}
-
-	new_name = _copy(name);
-	if (new_name == NULL)
-	{
-		free(snoopie);
-		return (NULL);
-	}
-	(*snoopie).name = new_name;
-
-	(*snoopie).age = age;
-
-	new_owner = _copy(owner);
-	if (new_owner == NULL)
-	{
-		free((*snoopie).name);
-		free(snoopie);
-		return (NULL);
-	}
-	(*snoopie).owner = new_owner;
-
-	return (snoopie);
+	dest[a] = '\0';
+	return (dest);
 }
